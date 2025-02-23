@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Burro Express | Subscribe</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <p style="font-family:cursive; font-size: 4vmin; line-height:0.25em;">A Voice in the Nevada Desert Making History</p>
+            <p style="font-family:serif; line-height:0.5em;">Miner of the Century™ Quarterly Newsletter</p>
+            <h1 style="font-size:6vmin;line-height:1em;">THE BURRO EXPRESS</h1>
+            <p style="font-size:2vmin;font-weight: bold;">Founded in 2000 AD</p>
+            <h3>Historic Goldfield Nevada</h3>
+        </div>
+    </header>
+    <main>
+       <section class="subscribe">
+        <p>Subscription Order Form</p>
+        <form id="subscribe">
+            <label for="name" type="text">Name </label><input type="text" id="name"><br>
+            <label for="address" type="text">Address </label><input type="text" id="address"><br>
+            <p style="cursor: pointer;">1 year (4 issues) $32.00    Outside USA $60.00</p>
+            <p style="cursor: pointer;">2 year (8 Issues) $54.00     Outside USA $70.00</p>
+            <p>Join up via PayPal - burroexpress@yahoo.com</p>
+            <p>Send Check or Money Order to: Burro Epxress<br>
+            P.O. Box 577, Goldfield, NV 89013</p>
+            <p><input type="checkbox" id="hard-copy"><label for="hard-copy">Hard Copy</label>
+            <input type="checkbox" id="electronic-copy"><label for="electronic-copy">Electronic Copy</label>
+            </p>
+        </form>
+       </section>
+       <br>
+        <p class="buttons">
+            <button onclick="joinViaPayPal()">Pay via Paypal</button>
+            <button onclick="window.print()">Print this Form</button>
+        </p>
+       <p class="return-home"><a id="return-home" href="/">Return Home</a></p>
+    </main>
+    <footer></footer>
+    <script>
+        function joinViaPayPal() {
+        // Get input values from the form
+        let nameInput = document.getElementById("name").value.trim();
+        let addressInput = document.getElementById("address").value.trim();
+    
+        // If inputs are empty, prompt the user
+        let name = nameInput || prompt("Enter your full name:");
+        if (!name) {
+            alert("You must enter a name.");
+            return;
+        }
+    
+        let address = addressInput || prompt("Enter your address:");
+        if (!address) {
+            alert("You must enter an address.");
+            return;
+        }
+    
+        let choice;
+        while (true) {
+            choice = prompt(
+                "Select your subscription:\n" +
+                "1 - 1 Year USA ($32)\n" +
+                "2 - 2 Years USA ($54)\n" +
+                "3 - 1 Year Outside USA ($60)\n" +
+                "4 - 2 Years Outside USA ($70)", 
+                "1"
+            );
+            
+            if (["1", "2", "3", "4"].includes(choice)) break;
+            alert("Invalid option. Please enter a number between 1 and 4.");
+        }
+    
+        let amounts = { "1": 32, "2": 54, "3": 60, "4": 70 };
+        let amount = amounts[choice];
+    
+        // Encode name and address for URL
+        let message = encodeURIComponent(`Name: ${name}, Address: ${address}`);
+    
+        // Construct PayPal URL with message
+        let paypalUrl = `https://www.paypal.com/donate?business=burroexpress@yahoo.com&currency_code=USD&amount=${amount}&custom=${message}`;
+    
+        window.open(paypalUrl, "_blank"); // Open PayPal in a new tab
+    }
+    </script>
+</body>
+</html>
