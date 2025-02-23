@@ -1,0 +1,62 @@
+* {
+    --header: 20vh;
+    --footer: 5vh;
+    --greetings: 100vh;
+    --contents: ;
+    --contact: ;
+}
+main {
+    display: grid;
+    grid-template-areas: "contents greetings"
+    "miner greetings"
+    "contact greetings";
+    margin: auto;
+    gap: 12px;
+}
+main > * {
+    width: min(50vw, fit-content);
+    min-width: 30vw;
+}
+header {
+    padding: 12px;
+    line-height: 0.2em;
+    text-align: center;
+    height: var(--header);
+    box-shadow: inset 0px 0px 0px 5px black,
+    0 0 0 3px white,
+    0px 0px 0px 5px black;
+    margin: 12px 6px;
+}
+contents {
+    text-align: center;
+    grid-area: contents;
+    height: 50vh;
+}
+contents ul {
+    list-style: none;
+}
+greetings {
+    padding: 12px;
+    grid-area: greetings;
+    height: 100vh;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+miner {
+    grid-area: miner;
+    display: flex;
+}
+miner img{
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+}
+contact {
+    padding: 12px;
+    grid-area: contact;
+    text-align: center;
+}
+
+contents, greetings, contact {
+    border: 1px solid black;
+}
