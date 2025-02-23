@@ -50,6 +50,73 @@
             <a href="tel:6572379527"> (657) 247-9527 </a>
         </section>
     </main>
-    <footer></footer>
+    <footer>
+        <button onclick="darkMode()">Dark Mode</button><button onclick="colorMode()">Switch Color</button>
+        <script>
+            let pastelColors = [
+                [50, 100],  // Pale Yellow (HSL: hsl(50, 100%, 80%))
+                [200, 80],  // Light Blue (HSL: hsl(200, 80%, 80%))
+                [120, 70],  // Light Green (HSL: hsl(120, 70%, 80%))
+                [0, 70]     // Light Red (HSL: hsl(0, 70%, 80%))
+            ];
+        
+            let colorIndex = localStorage.getItem("colorIndex") ? parseInt(localStorage.getItem("colorIndex")) : 0;
+            let darkModeOn = localStorage.getItem("darkMode") === "true";
+        
+            function darkMode() {
+                darkModeOn = !darkModeOn;
+                localStorage.setItem("darkMode", darkModeOn);
+                
+                document.documentElement.style.setProperty("--text-color", darkModeOn ? "white" : "black");
+                document.documentElement.style.setProperty("--lightness", darkModeOn ? "10%" : "80%");
+        
+                // Toggle image styles for dark mode
+                let minerImg = document.querySelector(".miner img");
+                if (darkModeOn) {
+                    minerImg.style.mixBlendMode = "screen";
+                    minerImg.style.filter = "invert(1)";
+                } else {
+                    minerImg.style.mixBlendMode = "multiply";
+                    minerImg.style.filter = "none";
+                }
+        
+                applyColor();
+            }
+        
+            function colorMode() {
+                colorIndex = (colorIndex + 1) % pastelColors.length;
+                localStorage.setItem("colorIndex", colorIndex);
+                applyColor();
+            }
+        
+            function applyColor() {
+                let [hue, saturation] = pastelColors[colorIndex];
+                let lightness = darkModeOn ? "10%" : "80%";
+                let newColor = `hsl(${hue}, ${saturation}%, ${lightness})`;
+        
+                document.documentElement.style.setProperty("--bg-color", newColor);
+            }
+        
+            // Load settings from localStorage on page load
+            document.addEventListener("DOMContentLoaded", () => {
+                if (localStorage.getItem("darkMode") === "true") {
+                    darkModeOn = true;
+                    document.documentElement.style.setProperty("--text-color", "white");
+                    document.documentElement.style.setProperty("--lightness", "10%");
+                }
+        
+                applyColor();
+        
+                let minerImg = document.querySelector(".miner img");
+                if (darkModeOn) {
+                    minerImg.style.mixBlendMode = "screen";
+                    minerImg.style.filter = "invert(1)";
+                } else {
+                    minerImg.style.mixBlendMode = "multiply";
+                    minerImg.style.filter = "none";
+                }
+            });
+        </script>
+    </footer>
 </body>
 </html>
