@@ -101,6 +101,7 @@ header {
     text-align: center;
 }
 .subscribe form input[type=text]{
+    background: none;
     border: none;
     border-bottom: 1px solid black;
     box-sizing: border-box;
