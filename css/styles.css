@@ -2,8 +2,8 @@
     --header: 20vh;
     --footer: 5vh;
     --greetings: 100vh;
-    --contents: ;
-    --contact: ;
+    --contents: 50vh;
+    --contact: 30vh;
 }
 main {
     display: grid;
@@ -14,7 +14,7 @@ main {
     gap: 12px;
 }
 main > * {
-    width: min(50vw, fit-content);
+    width: min(30vw, fit-content);
     min-width: 30vw;
 }
 header {
@@ -26,6 +26,7 @@ header {
     0 0 0 3px white,
     0px 0px 0px 5px black;
     margin: 12px 6px;
+    white-space: nowrap;
 }
 contents {
     text-align: center;
