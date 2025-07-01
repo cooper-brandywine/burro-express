@@ -11,39 +11,55 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
 </head>
 <body>
-    <header>
-        <div class="header">
-            <p style="font-family:cursive; font-size: 4vmin; line-height:0.25em;">A Voice in the Nevada Desert Making History</p>
-            <p style="font-family:serif; line-height:0.5em;">Miner of the Century™ Quarterly Newsletter</p>
-            <h1 style="font-size:6vmin;line-height:1em;">THE BURRO EXPRESS</h1>
-            <p style="font-size:2vmin;font-weight: bold;">Founded in 2000 AD</p>
-            <h3>Historic Goldfield Nevada</h3>
-        </div>
-    </header>
-    <main>
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <section id="promo" style="margin-top: 12px; padding: 12px; text-align: center; border: 12px solid var(--text-color);">
+        <h1 style="font-size:3rem;">SPECIAL DEAL!</h1>
+        <p>Buy a one year subscription, give a one year subscription! Simply attach a second form with your friends information. (Up to one year free.)</p>
+        </section>
+    <main id="subscribe">
+        
        <section class="subscribe">
         <p>Subscription Order Form</p>
         <form id="subscribe">
             <label for="name" type="text">Name </label><input type="text" id="name"><br>
             <label for="address" type="text">Address </label><input type="text" id="address"><br>
-            <p style="cursor: pointer;">1 year (4 issues) $32.00    Outside USA $60.00</p>
-            <p style="cursor: pointer;">2 year (8 Issues) $54.00     Outside USA $70.00</p>
+            <p style="cursor: pointer;">1 year (4 issues) $35.00    Outside USA $68.00</p>
+            <p style="cursor: pointer;">2 year (8 Issues) $68.00     Outside USA $128.00</p>
             <p>Join up via PayPal - burroexpress@yahoo.com</p>
-            <p>Send Check or Money Order to: Burro Epxress<br>
+            <p><b>Send Check or Money Order to:</b> Burro Express<br>
             P.O. Box 577, Goldfield, NV 89013</p>
             <p><input type="checkbox" id="hard-copy"><label for="hard-copy">Hard Copy</label>
             <input type="checkbox" id="electronic-copy"><label for="electronic-copy">Electronic Copy</label>
             </p>
         </form>
-       </section>
+        <p id="subscribe-note">Fill in your name and address, print out this form, and mail it to to the above address with check or money order to subscribe.</p>
+
+    </section>
+
        <br>
         <p class="buttons">
-            <button onclick="joinViaPayPal()">Pay via Paypal</button>
+            <button onclick="joinViaPayPal()" style="display:none;">Pay via Paypal</button>
             <button onclick="window.print()">Print this Form</button>
         </p>
-       <p class="return-home"><a id="return-home" href="./">Return Home</a></p>
     </main>
-    <footer></footer>
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <script src="js/dark-mode.js"></script>
     <script>
         function joinViaPayPal() {
         // Get input values from the form
@@ -67,10 +83,10 @@
         while (true) {
             choice = prompt(
                 "Select your subscription:\n" +
-                "1 - 1 Year USA ($32)\n" +
-                "2 - 2 Years USA ($54)\n" +
-                "3 - 1 Year Outside USA ($60)\n" +
-                "4 - 2 Years Outside USA ($70)", 
+                "1 - 1 Year USA ($35)\n" +
+                "2 - 2 Years USA ($68)\n" +
+                "3 - 1 Year Outside USA ($68)\n" +
+                "4 - 2 Years Outside USA ($128)", 
                 "1"
             );
             
@@ -78,15 +94,14 @@
             alert("Invalid option. Please enter a number between 1 and 4.");
         }
     
-        let amounts = { "1": 32, "2": 54, "3": 60, "4": 70 };
+        let amounts = { "1": 35, "2": 68, "3": 70, "4": 80 };
         let amount = amounts[choice];
     
         // Encode name and address for URL
         let message = encodeURIComponent(`Name: ${name}, Address: ${address}`);
     
         // Construct PayPal URL with message
-        let paypalUrl = `https://www.paypal.com/donate?business=burroexpress@yahoo.com&currency_code=USD&amount=${amount}&custom=${message}`;
-    
+        let paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=burroexpress@yahoo.com&currency_code=USD&amount=${amount}&item_name=${encodeURIComponent(message)}&no_shipping=2&address_override=1&rm=2`;
         window.open(paypalUrl, "_blank"); // Open PayPal in a new tab
     }
     </script>
