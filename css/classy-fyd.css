@@ -1,0 +1,91 @@
+main#classy-fyd-ads {
+    display: grid;
+    grid-template-areas: 
+    "contents ad1"
+    "ad2 ad2";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 2fr 2fr;
+    margin: auto;
+    gap: 12px;
+    margin: 12px 0px;
+}
+
+@media (max-width: 600px) {
+    main#classy-fyd-ads {
+        grid-template-areas: 
+        "contents"
+        "ad1"
+        "ad2";
+        grid-template-rows: 1fr 2fr 2fr;
+        grid-template-columns: 1fr;
+    }
+}
+
+.ad-container#dinky-diner {
+    grid-area: ad1;
+    padding: 1vmin;
+    margin: auto;
+    border: 6px dashed var(--text-color);
+    outline: 6px dashed var(--text-color);
+    text-align: center;
+    height: calc(100% - 12px);
+    width: calc(100% - 12px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-title {
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 32px;
+    font-weight: bold;
+}
+.ad-text {
+    font-family: cursive;
+    font-size: 16px;
+    margin: 10px 0;
+}
+.ad-address {
+    font-family: serif;
+}
+.ad-truckers {
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.ad-parking {
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+
+.classy-fyd-header {
+    text-align: center;
+    border: 20px solid transparent; /* Sets border width */
+    border-image-source: url('/images/nugget.png'); /* Image used for the border */
+    border-image-slice: 10; /* Ensures the whole image is used */
+    border-image-width: 20px; /* Ensures the border is 20px wide */
+    border-image-outset: 0px; /* Prevents the image from overflowing */
+    border-image-repeat: space; /* Adds spacing between each image */
+}
+
+
+.scroll#storage {
+    grid-area: ad2;
+    text-align: center;
+    border-image-source: url('/images/scroll.png');
+    border-image-slice: 50; /* Adjust this depending on your image */
+    border-image-repeat: round; /* Ensures it tiles properly */
+    border-image-width: 25px; /* Matches the border thickness */
+    grid-column: span 2;
+    padding: 50px;
+    display: flex;
+}
+
+.scroll div {
+    margin: auto;
+}

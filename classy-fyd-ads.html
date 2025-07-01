@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Burro Express | Homepage</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/classy-fyd.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <main id="classy-fyd-ads">
+        <section class="contents">
+            <h2>Classy-Fyd Ads</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+            </ul>
+        </section>
+        <div class="ad-container" id="dinky-diner">
+            <h1 class="ad-title">Dinky Diner</h1>
+            <p class="ad-address">323 E. Crook/Hwy95<br>Goldfield Nevada 89013</p>
+            <p class="ad-text">You'll Never Leave Hungry</p>
+            <p class="ad-text">No Dinky Portions</p>
+            <p class="ad-truckers">TRUCKERS  WELCOME<br></p>
+            <p class="ad-parking">Parking in Back<br></p>
+        </div>
+        <div class="scroll" id="storage">
+            <div>
+                <p style="font-family: sans-serif; font-weight: bold;">GOLDFIELD MINI-STORAGE</p>
+                <p>8'X10' $50/mo & 8'X20' $80/mo</p>
+                <p>Located on corner of</p>
+                <p>Euclid and Miner in Goldfield</p>
+                <p>(208)240-0770</p>
+                <p>Julie Fritz, Proprietor</p>
+            </div>
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <script src="js/dark-mode.js"></script>
+</body>
+</html>

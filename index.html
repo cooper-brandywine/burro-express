@@ -11,22 +11,25 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
 </head>
 <body>
-    <header>
-        <div class="header">
-            <p style="font-family:cursive; font-size: 4vmin; line-height:0.25em;">A Voice in the Nevada Desert Making History</p>
-            <p style="font-family:serif; line-height:0.5em;">Miner of the Century™ Quarterly Newsletter</p>
-            <h1 style="font-size:6vmin;line-height:1em;">THE BURRO EXPRESS</h1>
-            <p style="font-size:2vmin;font-weight: bold;">Founded in 2000 AD</p>
-            <h3>Historic Goldfield Nevada</h3>
-        </div>
-    </header>
-    <main>
-        <section class="contents">
-            <h2>CONTENTS</h2>
-            <ul>
-                <li><a href="subscribe.html">Subscribe</a></li>
-            </ul>
-        </section>
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <main id="home">
+        <section class="contents" id="contents-placeholder"></section>
+        <script>
+            fetch('contents.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contents-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading the contents:', error));
+        </script>
         <section class="greetings">
             Greetings,
             Black dark clouds brought down rain and made the desert floors muddy and black ice here and there. Jake and me waited out the last part of winter in Bodie, until the sun came out every day, meltin' all the snow on the paths we wuz walkin' to git through the Sierra Nevadas and arrive in Tonopah by early spring. Every year we would meet up with our friend, Jim Ramsey, who had just opened his new general store in Goldfield and Bob Morgan who came from Golden, Coloradee. The other two fellas from Old Town Sacramento would join us later at the Mizpah or the BelVada.
@@ -37,86 +40,39 @@
         <figure class="miner">
             <img src="images/burro.png">
         </figure>
-        <section class="contact">
-            <p style="font-family:cursive">Let us hear from YOU!</p>
-            <b>
-            The Burro Express<br>
-            P.O. Box 577<br>
-            Goldfield, NV 89013
-            </b>
-            <p><a href="mailto:burroexpress@yahoo.com">burroexpress@yahoo.com</a></p>
+       <section class="contact">
+    <p style="font-family:cursive">Let us hear from YOU!</p>
+    <b>
+        The Burro Express<br>
+        P.O. Box 577<br>
+        Goldfield, NV 89013
+    </b>
 
-            Advertising<br>
-            <a href="tel:6572379527"> (657) 247-9527 </a>
-        </section>
+    <p>Email: <span id="email-link"></span></p>
+    <p>Advertising: <span id="phone-link"></span></p>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let encodedEmail = "YnVycm9leHByZXNzQHlhaG9vLmNvbQ==";
+        let emailDecoded = atob(encodedEmail);
+        document.getElementById("email-link").innerHTML = `<a href="mailto:${emailDecoded}">${emailDecoded}</a>`;
+
+        let phoneParts = ["9527", "237", "657"];
+        let phoneDecoded = `(${phoneParts[2]}) ${phoneParts[1]}-${phoneParts[0]}`;
+        document.getElementById("phone-link").innerHTML = `<a href="tel:+1${phoneParts.join('')}">${phoneDecoded}</a>`;
+    });
+</script>
     </main>
-    <footer>
-        <button onclick="darkMode()">Dark Mode</button><button onclick="colorMode()">Switch Color</button>
-        <script>
-            let pastelColors = [
-                [50, 100],  // Pale Yellow (HSL: hsl(50, 100%, 80%))
-                [200, 80],  // Light Blue (HSL: hsl(200, 80%, 80%))
-                [120, 70],  // Light Green (HSL: hsl(120, 70%, 80%))
-                [0, 70]     // Light Red (HSL: hsl(0, 70%, 80%))
-            ];
-        
-            let colorIndex = localStorage.getItem("colorIndex") ? parseInt(localStorage.getItem("colorIndex")) : 0;
-            let darkModeOn = localStorage.getItem("darkMode") === "true";
-        
-            function darkMode() {
-                darkModeOn = !darkModeOn;
-                localStorage.setItem("darkMode", darkModeOn);
-                
-                document.documentElement.style.setProperty("--text-color", darkModeOn ? "white" : "black");
-                document.documentElement.style.setProperty("--lightness", darkModeOn ? "10%" : "80%");
-        
-                // Toggle image styles for dark mode
-                let minerImg = document.querySelector(".miner img");
-                if (darkModeOn) {
-                    minerImg.style.mixBlendMode = "screen";
-                    minerImg.style.filter = "invert(1)";
-                } else {
-                    minerImg.style.mixBlendMode = "multiply";
-                    minerImg.style.filter = "none";
-                }
-        
-                applyColor();
-            }
-        
-            function colorMode() {
-                colorIndex = (colorIndex + 1) % pastelColors.length;
-                localStorage.setItem("colorIndex", colorIndex);
-                applyColor();
-            }
-        
-            function applyColor() {
-                let [hue, saturation] = pastelColors[colorIndex];
-                let lightness = darkModeOn ? "10%" : "80%";
-                let newColor = `hsl(${hue}, ${saturation}%, ${lightness})`;
-        
-                document.documentElement.style.setProperty("--bg-color", newColor);
-            }
-        
-            // Load settings from localStorage on page load
-            document.addEventListener("DOMContentLoaded", () => {
-                if (localStorage.getItem("darkMode") === "true") {
-                    darkModeOn = true;
-                    document.documentElement.style.setProperty("--text-color", "white");
-                    document.documentElement.style.setProperty("--lightness", "10%");
-                }
-        
-                applyColor();
-        
-                let minerImg = document.querySelector(".miner img");
-                if (darkModeOn) {
-                    minerImg.style.mixBlendMode = "screen";
-                    minerImg.style.filter = "invert(1)";
-                } else {
-                    minerImg.style.mixBlendMode = "multiply";
-                    minerImg.style.filter = "none";
-                }
-            });
-        </script>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <script src="js/dark-mode.js"></script>
 </body>
 </html>

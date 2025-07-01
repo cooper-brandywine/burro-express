@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Archive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+    <div id="login-container">
+    <form onsubmit="event.preventDefault(); login();">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button type="submit">Login</button>
+    </form>
+    </div>
+    <p id="login-error"></p>
+
+    <div id="private-content" style="display:none;">
+        <h1>Archive</h1>
+        <table style="margin: auto;">
+            <th>Header</th>
+            <tr><td>First Issue</td></tr>
+            <tr><td>Second Issue</td></tr>
+            <tr><td>Third Issue</td></tr>
+            <tr><td>Fourth Issue</td></tr>
+        </table>
+
+        <div id="logout-container-container">
+            <div id="logout-container">
+            <div><p>Logged in as <span id="logged-in-user"></span></p>
+            </div>
+            <div><button onclick="logout()">Logout</button></div>
+            </div>
+        
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script.js"></script>
+    <script src="/js/dark-mode.js"></script>
+</body>
+</html>

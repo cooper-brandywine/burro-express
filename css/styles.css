@@ -1,3 +1,8 @@
+@font-face {
+    font-family: akaPosse;
+    src: url(../fonts/akaPosse.ttf);
+  }
+
 :root {
     --lightness: 80%; /* Light mode pastel */
     --bg-color: hsl(50, 100%, var(--lightness)); /* Default pastel yellow */
@@ -8,8 +13,6 @@
     --header: 20vh;
     --footer: 5vh;
     --greetings: 100vh;
-    --contents: ;
-    --contact: ;
 }
 body {
     background-color: var(--bg-color);
@@ -24,7 +27,7 @@ footer {
     justify-content: space-between;
     gap: 12px;
 }
-main {
+main#home {
     display: grid;
     grid-template-areas: "contents miner"
     "greetings greetings"
@@ -36,6 +39,7 @@ main {
     margin: 12px 0px;
 }
 button {
+    margin: auto;
     background: none;
     color: var(--text-color);
     border: 1px solid var(--text-color);
@@ -43,7 +47,7 @@ button {
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 6px;
-    padding: 6px;
+    padding: 12px;
     box-sizing: border-box;
 }
 a {
@@ -96,8 +100,12 @@ header {
 
 /* subscribe */
 
+main#subscribe {
+    margin: 12px 0;
+}
+
 .subscribe {
-    border: 2px black dashed;
+    border: 2px var(--text-color) dashed;
     width: 100%;
     grid-column: span 2;
     grid-row: 1;
@@ -109,21 +117,42 @@ header {
 }
 .subscribe form input[type=text]{
     background: none;
+    color: var(--text-color);
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--text-color);
+    border-radius: 0px;
     box-sizing: border-box;
-    width: 87.5%;
+    width: 85%;
+}
+.subscribe form input[type=checkbox]{
+    background: none;
+    border: none;
+    border-left: 1px solid var(--text-color);
+    border-right: 1px solid var(--text-color);
+    border-radius: 0px;
 }
 .subscribe form label[type=text] {
     display: inline-block;
     line-height: 2em;
-    width: 12.5%;
+    width: 15%;
+}
+#subscribe-note {
+    grid-column: span 2;
+    text-align: center;
 }
 p.buttons {
     grid-column: span 2;
     grid-row: 2;
     margin: 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.buttons {
+    width: calc(100% - 24px);
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
 }
 .return-home{
     grid-column: span 2;
@@ -131,10 +160,36 @@ p.buttons {
     text-align: center;
 }
 
+#darkmode{
+    color: var(--text-color);
+    fill: var(--text-color)
+}
+
+/* tooltip time */
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    padding: 12px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    font-size: 24px;
+    line-height: 18px;
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 1;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
 /* Desktop Version */
 
 @media (min-width:800px) {
-    main {
+    main#home {
         display: grid;
         grid-template-areas: "contents greetings"
         "miner greetings"
@@ -149,6 +204,8 @@ p.buttons {
 
 @media print {
     body {
+        color:black;
+        background: white;
         width: 100%;
         margin: auto;
         padding: 0;
@@ -158,6 +215,7 @@ p.buttons {
     .subscribe {
         page-break-after: avoid;
         page-break-before: avoid;
+        border: 2px black dashed;
     }
 
     main {
@@ -165,11 +223,18 @@ p.buttons {
         height: auto;
     }
 
-    * {
-        overflow: hidden !important;
+    .subscribe form input[type=text]{
+        background: none;
+        color: black;
+        border-bottom: 1px solid black;
+        border-radius: 0px;
     }
 
-    button, #return-home {
+    header, .header {
+        border-color: black;
+    }
+
+    button, #return-home, #subscribe-note {
         display: none; /* Hides unnecessary elements in print */
     }
 }
